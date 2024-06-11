@@ -15,6 +15,13 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
+
+const __dirname2 = path.resolve();
+app.use(express.static(path.join(__dirname2, "/frontend/dist")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname2, "frontend", "dist", "index.html"))
+);
+
 app.use(express.json());
 app.use(corsMiddleware);
 app.use(responseMiddleWare);
